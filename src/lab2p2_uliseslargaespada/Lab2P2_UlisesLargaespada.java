@@ -7,8 +7,7 @@ import java.util.*;
  * @author ularg
  */
 public class Lab2P2_UlisesLargaespada {
-
-  // Usuario de la sesion del momento 
+  // Usuario de la sesion del momento como variable global
   private static User currentUser;
 
   /**
@@ -28,7 +27,7 @@ public class Lab2P2_UlisesLargaespada {
     Scanner entry = new Scanner(System.in);
 
     System.out.println("-- Bienvenido al Laboratorio #2 de Program II --");
-    System.out.println("Aqui podrás realizar administracion en el sistema de bienes y racies Black Floyd");
+    System.out.println("Aqui podrás realizar administracion en el sistema de bienes y raices Black Floyd");
     System.out.println("Es posible registrar inmuebles, manejar sus estados, y mas");
     System.out.println("Primero tendras que iniciar sesion para poder hacer algun cambio");
 
@@ -40,6 +39,11 @@ public class Lab2P2_UlisesLargaespada {
     // ArrayLists para cada
     ArrayList inmuebles = new ArrayList();
     ArrayList<User> usuarios = new ArrayList();
+    
+    // Crear el usuario admin
+    User admin = new User("Ulises Largaespada", 23, "admin", "admin1234");
+    
+    usuarios.add(admin);
 
     do {
       System.out.println("Elija que opcion deseas: ");
@@ -47,8 +51,7 @@ public class Lab2P2_UlisesLargaespada {
       System.out.println("2 - Manejo de Estados");
       System.out.println("3 - Log In/Sign Up");
       System.out.println("4 - Log Out");
-      System.out.println("5 - Vender Inmuebles");
-      System.out.println("6 - Salir \n");
+      System.out.println("5 - Salir \n");
 
       System.out.print("Ingrese la opción: ");
       int option = entry.nextInt();
@@ -69,17 +72,17 @@ public class Lab2P2_UlisesLargaespada {
         case 4 -> {
           logout();
         }
-
+        
         case 5 -> {
-          inmuebles = venderInmuebles(currentUser, inmuebles);
+          System.out.println("Ten un buen dia " + nombre);
         }
-
+        
         default ->
           System.out.println("Elija una opcion de las anteriores");
       }
 
       // Salir del programa 
-      if (option == 6) {
+      if (option == 5) {
         break;
       }
     } while (true);
@@ -88,6 +91,12 @@ public class Lab2P2_UlisesLargaespada {
   // Metodo para administrar el registro de cosas
   public static ArrayList registrarInmuebles(ArrayList inmuebles) {
     ArrayList updateInmuebles = inmuebles;
+    
+    if(currentUser.isLoginState()) {
+      
+    } else {
+      System.out.println("No has iniciado sesion, por lo que no puedes ver esta seccion \n");
+    }
 
     return updateInmuebles;
   }
@@ -95,6 +104,12 @@ public class Lab2P2_UlisesLargaespada {
   // Metodo para manejar el estado de las casas o edificios
   public static ArrayList manejoDeEstados(ArrayList inmuebles) {
     ArrayList updateEstadosInmuebles = inmuebles;
+    
+    if(currentUser.isLoginState()) {
+      
+    } else {
+      System.out.println("No has iniciado sesion como administrador, por lo que no puedes ver esta seccion \n");
+    }
 
     return updateEstadosInmuebles;
   }
@@ -105,7 +120,7 @@ public class Lab2P2_UlisesLargaespada {
     // Initialize scanner
     Scanner entry = new Scanner(System.in);
 
-    ArrayList<User> updatedUser = usuarios;
+    ArrayList<User> updatedUsers = usuarios;
 
     System.out.println("Elija la option que desea");
     System.out.println("1 - Iniciar Sesion con un Usuario");
@@ -115,12 +130,11 @@ public class Lab2P2_UlisesLargaespada {
 
     switch (option) {
       case 1 -> {
-        logInUser();
-
+        logInUser(updatedUsers);
       }
 
       case 2 -> {
-
+        updatedUsers.add(singUpUser());
       }
 
       default -> {
@@ -128,11 +142,11 @@ public class Lab2P2_UlisesLargaespada {
       }
     }
 
-    return updatedUser;
+    return updatedUsers;
   }
 
   // Metodo para iniciar sesion
-  public static User logInUser() {
+  public static void logInUser(ArrayList<User> usuarios) {
     System.out.println("Aqui podras iniciar iniciar sesion");
 
     // Initialize scanner
@@ -144,9 +158,23 @@ public class Lab2P2_UlisesLargaespada {
     System.out.print("Indique la password: ");
     String password = entry.nextLine();
     
-    User nuevoUsuario = new User();
+    // Comparar si existe un usuario con esas credeniales
+    for (User user : usuarios) {
+      if(user.getUsername().equals(username)) {
+        if (user.getPassword().equals(password)) {
+          System.out.println("Excelente!");
+          System.out.println("Has iniciado sesion como: " + user.getUsername() + "\n");
+        } else {
+          System.out.println("Incorrect password \n");
+        }
+      } else {
+        System.out.println("Ese username no existe \n");
+      }
+    }
     
-    return nuevoUsuario;
+    currentUser = new User();
+    currentUser.setLoginState(true);
+    
   }
 
   // Metodo para crear un nuevo usuario
@@ -173,14 +201,21 @@ public class Lab2P2_UlisesLargaespada {
     
     User nuevoUsuario = new User(nombre, edad, username, password);
     
+    System.out.println("--Usuario creado Exitosamente--\n");
+    
     return nuevoUsuario;
   }
   // Metodo para manejar el espape de sesion
   public static void logout() {
      if(currentUser.isLoginState()) {
+       System.out.println("Saliendo de sesion...");
+       System.out.println("Listo!");
+       currentUser = new User();
+       currentUser.setLoginState(false);
        
      } else {
        System.out.println("No has iniciado sesion todavia");
+       System.out.println("Debes iniciar sesion primero para salir de una \n");
      }
   }
 
