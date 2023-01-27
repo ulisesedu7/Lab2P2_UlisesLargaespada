@@ -9,6 +9,7 @@ public class Edificio {
   private int cantidadLocales;
   private String direccion;
   private String estado;
+  private User owner;
   
   public Edificio() {
   }
@@ -17,6 +18,7 @@ public class Edificio {
     this.numeroPisos = numeroPisos;
     this.cantidadLocales = cantidadLocales;
     this.direccion = direccion;
+    this.estado = "Estado de Demolicion";
   }
 
   public int getNumeroPisos() {
@@ -49,6 +51,14 @@ public class Edificio {
 
   public void setEstado(String estado) {
     this.estado = estado;
+  }
+
+  public User getOwner() {
+    return owner;
+  }
+
+  public void setOwner(User owner) {
+    this.owner = owner;
   }
 
   @Override

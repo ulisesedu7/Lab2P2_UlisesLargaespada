@@ -15,6 +15,7 @@ public class Casa {
   private int numeroBaths;
   private int numeroCuartos;
   private String estado;
+  private User owner;
 
   public Casa() {
   }
@@ -27,6 +28,7 @@ public class Casa {
     this.largo = largo;
     this.numeroBaths = numeroBaths;
     this.numeroCuartos = numeroCuartos;
+    this.estado = "Estado de Demolicion";
   }
 
   public int getNumeroCasa() {
@@ -91,6 +93,14 @@ public class Casa {
 
   public void setEstado(String estado) {
     this.estado = estado;
+  }
+
+  public User getOwner() {
+    return owner;
+  }
+
+  public void setOwner(User owner) {
+    this.owner = owner;
   }
 
   @Override
