@@ -13,6 +13,7 @@ public class User {
   private int edad;
   private String username;
   private String password;
+  private boolean loginState;
   
   public User(){
   }
@@ -59,6 +60,14 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public boolean isLoginState() {
+    return loginState;
+  }
+
+  public void setLoginState(boolean loginState) {
+    this.loginState = loginState;
   }
 
   @Override
