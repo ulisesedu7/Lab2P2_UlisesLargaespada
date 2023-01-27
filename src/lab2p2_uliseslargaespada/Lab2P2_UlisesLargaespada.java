@@ -55,9 +55,15 @@ public class Lab2P2_UlisesLargaespada {
         }
 
         case 2 -> {
+          inmuebles = manejoDeEstados(loginState, inmuebles);
         }
 
         case 3 -> {
+          loginState = loginOrSignp(loginState);
+        }
+        
+        case 4 -> {
+          loginState = logout(loginState);
         }
 
         default ->
@@ -71,9 +77,31 @@ public class Lab2P2_UlisesLargaespada {
     } while (true);
   }
   
+  // Metodo para administrar el registro de cosas
   public static ArrayList registrarInmuebles(boolean loginInfo, ArrayList inmuebles) {
     ArrayList updateInmuebles = inmuebles;
     
     return updateInmuebles;
+  }
+  
+  // Metodo para manejar el estado de las casas o edificios
+  public static ArrayList manejoDeEstados(boolean loginInfo, ArrayList inmuebles) {
+    ArrayList updateEstadosInmuebles = inmuebles;
+    
+    return updateEstadosInmuebles;
+  }
+  
+  // Metodo para manejar el inicio de sesion
+  public static boolean loginOrSignp(boolean loginInfo) {
+    boolean updatedLogin = loginInfo;
+    
+    return updatedLogin;
+  }
+  
+  // Metodo para manejar el espape de sesion
+  public static boolean logout(boolean loginInfo) {
+    boolean updatedLogin = loginInfo;
+    
+    return updatedLogin;
   }
 }
