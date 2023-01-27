@@ -8,6 +8,7 @@ public class Edificio {
   private int numeroPisos;
   private int cantidadLocales;
   private String direccion;
+  private String estado;
   
   public Edificio() {
   }
@@ -40,6 +41,14 @@ public class Edificio {
 
   public void setDireccion(String direccion) {
     this.direccion = direccion;
+  }
+
+  public String getEstado() {
+    return estado;
+  }
+
+  public void setEstado(String estado) {
+    this.estado = estado;
   }
 
   @Override

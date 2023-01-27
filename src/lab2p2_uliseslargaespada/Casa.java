@@ -14,6 +14,7 @@ public class Casa {
   private float largo;
   private int numeroBaths;
   private int numeroCuartos;
+  private String estado;
 
   public Casa() {
   }
@@ -82,6 +83,14 @@ public class Casa {
 
   public void setNumeroCuartos(int numeroCuartos) {
     this.numeroCuartos = numeroCuartos;
+  }
+
+  public String getEstado() {
+    return estado;
+  }
+
+  public void setEstado(String estado) {
+    this.estado = estado;
   }
 
   @Override

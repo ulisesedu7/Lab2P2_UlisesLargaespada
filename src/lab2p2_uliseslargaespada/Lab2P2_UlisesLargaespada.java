@@ -33,6 +33,10 @@ public class Lab2P2_UlisesLargaespada {
     String nombre = entry.nextLine();
 
     System.out.println("Mucho gusto " + nombre + "\n");
+    
+    // ArrayLists para cada
+    ArrayList inmuebles = new ArrayList();
+    ArrayList<User> usuarios = new ArrayList();
 
     do {
       System.out.println("Elija que opcion deseas: ");
@@ -47,6 +51,7 @@ public class Lab2P2_UlisesLargaespada {
 
       switch (option) {
         case 1 -> {
+          inmuebles = registrarInmuebles(loginState, inmuebles);
         }
 
         case 2 -> {
@@ -66,4 +71,9 @@ public class Lab2P2_UlisesLargaespada {
     } while (true);
   }
   
+  public static ArrayList registrarInmuebles(boolean loginInfo, ArrayList inmuebles) {
+    ArrayList updateInmuebles = inmuebles;
+    
+    return updateInmuebles;
+  }
 }
