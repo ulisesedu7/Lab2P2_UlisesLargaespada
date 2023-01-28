@@ -358,6 +358,36 @@ public class Lab2P2_UlisesLargaespada {
 
     ArrayList updateInmuebles = inmuebles;
 
+    if (updateInmuebles.size() != 0) {
+      System.out.println("Aqui podras vender tus inmuebles");
+
+      System.out.println("Estos son los inmuebles disponibles: ");
+      for (Object inmueble : updateInmuebles) {
+        System.out.println(updateInmuebles.indexOf(inmueble) + "- " + inmueble);
+      }
+
+      System.out.println();
+      System.out.println("Seleccione el que quiere vender");
+
+      int option = entry.nextInt();
+
+      if (updateInmuebles.get(option) instanceof Casa) {
+        ((Casa) updateInmuebles.get(option)).setOwner(currentUser);
+      }
+
+      if (updateInmuebles.get(option) instanceof Edificio) {
+        ((Edificio) updateInmuebles.get(option)).setOwner(currentUser);
+      }
+
+      if (updateInmuebles.get(option) instanceof Solar) {
+        ((Solar) updateInmuebles.get(option)).setOwner(currentUser);
+      }
+
+      System.out.println("--Inmueble eliminado correctamente--");
+    } else {
+      System.out.println("No hay inmuebles para vender");
+    }
+
     return updateInmuebles;
   }
 
@@ -393,19 +423,19 @@ public class Lab2P2_UlisesLargaespada {
 
           switch (selection) {
             case 1 -> {
-              ((Casa)updateEstadosInmuebles.get(option)).setEstado("Construccion en Espera");
+              ((Casa) updateEstadosInmuebles.get(option)).setEstado("Construccion en Espera");
             }
 
             case 2 -> {
-              ((Casa)updateEstadosInmuebles.get(option)).setEstado("En Construccion");
+              ((Casa) updateEstadosInmuebles.get(option)).setEstado("En Construccion");
             }
 
             case 3 -> {
-              ((Casa)updateEstadosInmuebles.get(option)).setEstado("En espera de demolicion");
+              ((Casa) updateEstadosInmuebles.get(option)).setEstado("En espera de demolicion");
             }
 
             case 4 -> {
-              ((Casa)updateEstadosInmuebles.get(option)).setEstado("Lista");
+              ((Casa) updateEstadosInmuebles.get(option)).setEstado("Lista");
             }
           }
         }
@@ -421,19 +451,19 @@ public class Lab2P2_UlisesLargaespada {
 
           switch (selection) {
             case 1 -> {
-              ((Edificio)updateEstadosInmuebles.get(option)).setEstado("Construccion en Espera");
+              ((Edificio) updateEstadosInmuebles.get(option)).setEstado("Construccion en Espera");
             }
 
             case 2 -> {
-              ((Edificio)updateEstadosInmuebles.get(option)).setEstado("En Construccion");
+              ((Edificio) updateEstadosInmuebles.get(option)).setEstado("En Construccion");
             }
 
             case 3 -> {
-              ((Edificio)updateEstadosInmuebles.get(option)).setEstado("En espera de demolicion");
+              ((Edificio) updateEstadosInmuebles.get(option)).setEstado("En espera de demolicion");
             }
 
             case 4 -> {
-              ((Edificio)updateEstadosInmuebles.get(option)).setEstado("Lista");
+              ((Edificio) updateEstadosInmuebles.get(option)).setEstado("Lista");
             }
           }
         }
