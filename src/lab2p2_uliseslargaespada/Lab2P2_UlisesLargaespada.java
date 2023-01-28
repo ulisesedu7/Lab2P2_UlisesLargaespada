@@ -300,6 +300,23 @@ public class Lab2P2_UlisesLargaespada {
 
     ArrayList updateInmuebles = inmuebles;
 
+    if (updateInmuebles.size() != 0) {
+      System.out.println("Aqui podras modificar los inmuebles disponibles");
+
+      System.out.println("Estos son los inmuebles disponibles: ");
+      for (Object inmueble : updateInmuebles) {
+        System.out.println(updateInmuebles.indexOf(inmueble) + "- " + inmueble);
+      }
+
+      System.out.println();
+      System.out.println("Seleccione el que quiere eliminar");
+
+      int option = entry.nextInt();
+
+    } else {
+      System.out.println("No hay elementos para modificar");
+    }
+
     return updateInmuebles;
   }
 
@@ -310,23 +327,23 @@ public class Lab2P2_UlisesLargaespada {
 
     ArrayList updateInmuebles = inmuebles;
 
-    if (inmuebles.size() != 0) {
+    if (updateInmuebles.size() != 0) {
       System.out.println("Aqui podras eliminar los inmuebles disponibles");
 
       System.out.println("Estos son los inmuebles disponibles: ");
       for (Object inmueble : updateInmuebles) {
         System.out.println(updateInmuebles.indexOf(inmueble) + "- " + inmueble);
       }
-      
+
       System.out.println();
       System.out.println("Seleccione el que quiere eliminar");
 
       int option = entry.nextInt();
 
       updateInmuebles.remove(option);
-      
+
       System.out.println("--Inmueble eliminado correctamente--");
-      
+
     } else {
       System.out.println("No hay elementos para borrar");
     }
@@ -346,10 +363,88 @@ public class Lab2P2_UlisesLargaespada {
 
   // Metodo para manejar el estado de las casas o edificios
   public static ArrayList manejoDeEstados(ArrayList inmuebles) {
+    // Initialize scanner
+    Scanner entry = new Scanner(System.in);
+
     ArrayList updateEstadosInmuebles = inmuebles;
 
     if (currentUser.isLoginState()) {
+      if (updateEstadosInmuebles.size() != 0) {
+        System.out.println("Aqui podras cambiar el estado de las casas o edificios");
 
+        System.out.println("Estos son los inmuebles disponibles: ");
+        for (Object inmueble : updateEstadosInmuebles) {
+          System.out.println(updateEstadosInmuebles.indexOf(inmueble) + "- " + inmueble);
+        }
+
+        System.out.println();
+        System.out.println("Seleccione el que quiere eliminar");
+
+        int option = entry.nextInt();
+
+        if (updateEstadosInmuebles.get(option) instanceof Casa) {
+          System.out.println("Ahora selecciona el estado del inmueble: ");
+          System.out.println("1 - En Construccion (espera)");
+          System.out.println("2 - En Construccion");
+          System.out.println("3 - En espera de demolicion");
+          System.out.println("4 - Lista");
+
+          int selection = entry.nextInt();
+
+          switch (selection) {
+            case 1 -> {
+              ((Casa)updateEstadosInmuebles.get(option)).setEstado("Construccion en Espera");
+            }
+
+            case 2 -> {
+              ((Casa)updateEstadosInmuebles.get(option)).setEstado("En Construccion");
+            }
+
+            case 3 -> {
+              ((Casa)updateEstadosInmuebles.get(option)).setEstado("En espera de demolicion");
+            }
+
+            case 4 -> {
+              ((Casa)updateEstadosInmuebles.get(option)).setEstado("Lista");
+            }
+          }
+        }
+
+        if (updateEstadosInmuebles.get(option) instanceof Edificio) {
+          System.out.println("Ahora selecciona el estado del inmueble: ");
+          System.out.println("1 - En Construccion (espera)");
+          System.out.println("2 - En Construccion");
+          System.out.println("3 - En espera de demolicion");
+          System.out.println("4 - Lista");
+
+          int selection = entry.nextInt();
+
+          switch (selection) {
+            case 1 -> {
+              ((Edificio)updateEstadosInmuebles.get(option)).setEstado("Construccion en Espera");
+            }
+
+            case 2 -> {
+              ((Edificio)updateEstadosInmuebles.get(option)).setEstado("En Construccion");
+            }
+
+            case 3 -> {
+              ((Edificio)updateEstadosInmuebles.get(option)).setEstado("En espera de demolicion");
+            }
+
+            case 4 -> {
+              ((Edificio)updateEstadosInmuebles.get(option)).setEstado("Lista");
+            }
+          }
+        }
+
+        if (updateEstadosInmuebles.get(option) instanceof Solar) {
+          System.out.println("No puedes modificar el estado de un solar");
+        }
+
+      } else {
+        System.out.println("No tienes inmuebles para modificar sus estados");
+      }
     } else {
       System.out.println("No has iniciado sesion como administrador, por lo que no puedes ver esta seccion \n");
     }
