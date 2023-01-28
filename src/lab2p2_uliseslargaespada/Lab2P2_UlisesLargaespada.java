@@ -101,7 +101,7 @@ public class Lab2P2_UlisesLargaespada {
     if (currentUser.isLoginState()) {
       System.out.println("Bienvenido " + currentUser.getNombre() + "!");
       System.out.println("En esta seccion podras hacer varias acciones en el registro de inmuebles");
-      
+
       do {
         System.out.println("Elije la opcion que deseas: ");
         System.out.println("1 - Crear Casa/Edificios/Solares");
@@ -110,37 +110,37 @@ public class Lab2P2_UlisesLargaespada {
         System.out.println("4 - Borrar Casa/Edificios/Solares");
         System.out.println("5 - Vender Casa/Edificios/Solares");
         System.out.println("6 - Regresar al menu principal");
-        
+
         int option = entry.nextInt();
-        
-        switch(option) {
+
+        switch (option) {
           case 1 -> {
             updateInmuebles = crearInmuebles(updateInmuebles);
           }
-          
+
           case 2 -> {
-            
+            listarInmuebles(updateInmuebles);
           }
-          
+
           case 3 -> {
-            
+            updateInmuebles = modificarInmuebles(updateInmuebles);
           }
-          
+
           case 4 -> {
-            
+            updateInmuebles = borrarInmuebles(updateInmuebles);
           }
-          
+
           case 5 -> {
-            
+            updateInmuebles = venderInmuebles(updateInmuebles);
           }
-          
+
           case 6 -> {
             System.out.println("Regresando al menu principal \n");
           }
         }
 
         // Salir del programa 
-        if (option == 5) {
+        if (option == 6) {
           break;
         }
       } while (true);
@@ -151,132 +151,198 @@ public class Lab2P2_UlisesLargaespada {
 
     return updateInmuebles;
   }
-  
+
   // Metodo para crear inmuebles
   public static ArrayList crearInmuebles(ArrayList inmuebles) {
     // Initialize scanner
     Scanner entry = new Scanner(System.in);
-    
+
     ArrayList updateInmuebles = inmuebles;
-    
+
     System.out.println("En este menu podras agregar inmuebles");
     System.out.println("Elije la opcion que desees agregar: ");
     System.out.println("1 - Crear casas");
     System.out.println("2 - Crear edificios");
     System.out.println("3 - Crear solares");
-    
+
     int option = entry.nextInt();
-    switch(option) {
+    switch (option) {
       case 1 -> {
         System.out.println("Para crear una casa debes de brindar los siguientes parametros: ");
         System.out.print("Numero de casa: ");
         int numCasa = entry.nextInt();
-        
+
         System.out.print("Numero de bloque: ");
         int numBloqueCasa = entry.nextInt();
-        
+
         System.out.print("Color de la casa: ");
         Color colorCasa = JColorChooser.showDialog(null, "Seleccione un color", Color.red);
-        
+
         System.out.print("Ancho de la casa: ");
         float ancho = entry.nextFloat();
-        
+
         System.out.print("Largo de la casa: ");
         float largo = entry.nextFloat();
-        
+
         System.out.print("Numero de baths: ");
         int numBaths = entry.nextInt();
-        
+
         System.out.print("Numero de cuartos: ");
         int numRooms = entry.nextInt();
-        
+
         Casa casaNueva = new Casa(numCasa, numBloqueCasa, colorCasa, ancho, largo, numBaths, numRooms);
         casaNueva.setOwner(currentUser);
-       updateInmuebles.add(casaNueva);
-       
-        System.out.println("--Casa creada exitosamente!!--");       
+        updateInmuebles.add(casaNueva);
+
+        System.out.println("--Casa creada exitosamente!!--\n");
       }
-      
+
       case 2 -> {
         System.out.println("Para crear un edificio debes de brindar los siguientes parametros: ");
         System.out.print("Numero de pisos: ");
         int numPisos = entry.nextInt();
-        
+
         System.out.print("Numero de locales: ");
         int numLocales = entry.nextInt();
-        
+
         System.out.print("Describe la direccion: ");
         entry.nextLine();
         String direccion = entry.nextLine();
-        
+
         Edificio edificioNuevo = new Edificio(numPisos, numLocales, direccion);
         edificioNuevo.setOwner(currentUser);
-        
+
         updateInmuebles.add(edificioNuevo);
-        
-        System.out.println("--Edificio creado exitosamente!!--");
+
+        System.out.println("--Edificio creado exitosamente!!--\n");
       }
-      
+
       case 3 -> {
         System.out.println("Para crear un solar debes de brindar los siguientes parametros: ");
-        
+
         System.out.print("Ancho del solar: ");
         float ancho = entry.nextFloat();
-        
+
         System.out.print("Largo del solar: ");
         float largo = entry.nextFloat();
-        
+
         Solar solarNuevo = new Solar(ancho, largo);
         solarNuevo.setOwner(currentUser);
-        
+
         updateInmuebles.add(solarNuevo);
-        
-        System.out.println("--Solar creado exitosamente!!--");
+
+        System.out.println("--Solar creado exitosamente!!--\n");
       }
-      
+
       default -> {
         System.out.println("Opcion no listada - Regresando al menu anterior");
       }
     }
-    
+
     return updateInmuebles;
   }
-  
+
   // Metodo para listar muebles
   public static void listarInmuebles(ArrayList inmuebles) {
-    
+    // Initialize scanner
+    Scanner entry = new Scanner(System.in);
+
+    if (inmuebles.size() != 0) {
+      System.out.println("Aqui podras ver los inmuebles disponibles");
+
+      System.out.println("Selecciona que es lo que deseas listar: ");
+      System.out.println("1 - Casas");
+      System.out.println("2 - Edificios");
+      System.out.println("3 - Solares");
+
+      int option = entry.nextInt();
+
+      switch (option) {
+        case 1 -> {
+          System.out.println("Aqui podremos ver una lista de las casas: ");
+
+          for (Object inmueble : inmuebles) {
+            if (inmueble instanceof Casa) {
+              System.out.println(inmuebles.indexOf(inmueble) + "- " + inmueble);
+            }
+          }
+        }
+
+        case 2 -> {
+          System.out.println("Aqui podremos ver una lista de los solares: ");
+
+          for (Object inmueble : inmuebles) {
+            if (inmueble instanceof Casa) {
+              System.out.println(inmuebles.indexOf(inmueble) + "- " + inmueble);
+            }
+          }
+        }
+
+        case 3 -> {
+          System.out.println("Aqui podremos ver una lista de los solares: ");
+
+          for (Object inmueble : inmuebles) {
+            if (inmueble instanceof Solar) {
+              System.out.println(inmuebles.indexOf(inmueble) + "- " + inmueble);
+            }
+          }
+        }
+      }
+    } else {
+      System.out.println("No has creado ningun inmueble todavia");
+    }
   }
-  
+
   // Metodo para modificar inmuebles
   public static ArrayList modificarInmuebles(ArrayList inmuebles) {
     // Initialize scanner
     Scanner entry = new Scanner(System.in);
-    
+
     ArrayList updateInmuebles = inmuebles;
-    
+
     return updateInmuebles;
   }
-  
+
   // Metodo para borrar inmuebles
   public static ArrayList borrarInmuebles(ArrayList inmuebles) {
     // Initialize scanner
     Scanner entry = new Scanner(System.in);
-    
+
     ArrayList updateInmuebles = inmuebles;
-    
+
+    if (inmuebles.size() != 0) {
+      System.out.println("Aqui podras eliminar los inmuebles disponibles");
+
+      System.out.println("Estos son los inmuebles disponibles: ");
+      for (Object inmueble : updateInmuebles) {
+        System.out.println(updateInmuebles.indexOf(inmueble) + "- " + inmueble);
+      }
+      
+      System.out.println();
+      System.out.println("Seleccione el que quiere eliminar");
+
+      int option = entry.nextInt();
+
+      updateInmuebles.remove(option);
+      
+      System.out.println("--Inmueble eliminado correctamente--");
+      
+    } else {
+      System.out.println("No hay elementos para borrar");
+    }
+
     return updateInmuebles;
   }
-  
+
   // Metodo para vender inmuebles
   public static ArrayList venderInmuebles(ArrayList inmuebles) {
     // Initialize scanner
     Scanner entry = new Scanner(System.in);
-    
+
     ArrayList updateInmuebles = inmuebles;
-    
+
     return updateInmuebles;
   }
-  
 
   // Metodo para manejar el estado de las casas o edificios
   public static ArrayList manejoDeEstados(ArrayList inmuebles) {
@@ -291,7 +357,7 @@ public class Lab2P2_UlisesLargaespada {
     return updateEstadosInmuebles;
   }
 
-  // Metodo para manejar el inicio de sesion
+  // Metodo para manejar el inicio de sesion -- SIGNUPPART
   public static ArrayList loginOrSignp(ArrayList<User> usuarios) {
     System.out.println("--Aqui podras iniciar sesion o crear un usuario--");
     // Initialize scanner
